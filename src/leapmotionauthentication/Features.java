@@ -15,6 +15,9 @@ public class Features {
         controller.enableGesture(Gesture.Type.TYPE_CIRCLE);
         controller.enableGesture(Gesture.Type.TYPE_KEY_TAP);
         controller.enableGesture(Gesture.Type.TYPE_SCREEN_TAP);
+        if (controller.policyFlags() != Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES) {
+            controller.setPolicyFlags(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
+        }
     }
 
     // Returns the latest frame
