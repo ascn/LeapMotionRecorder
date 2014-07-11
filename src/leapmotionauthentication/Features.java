@@ -444,16 +444,4 @@ public class Features {
         return gestProp;
     }
 
-    public static Bone getBone(Controller controller, Finger fingerName, Bone.Type boneType) {
-        Frame currentFrame = controller.frame();
-        FingerList allFingers = currentFrame.fingers();
-        for (Finger finger : allFingers) {
-            if (finger.equals(fingerName)) {
-                Bone bone = finger.bone(boneType);
-                return bone;
-            }
-        }
-        return null;
-    }
-
 }
