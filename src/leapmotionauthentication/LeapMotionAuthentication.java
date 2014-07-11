@@ -13,18 +13,22 @@ public class LeapMotionAuthentication {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
+        
+        // Set timer
+        long programTime = 900000; // milliseconds
         long start = System.currentTimeMillis();
-        long end = start + 900000;
+        long end = start + programTime;
 
+        // Initialize controller and listener
         AuthenticateListener listener = new AuthenticateListener();
         Controller controller = new Controller();
         Features.initialize(controller, listener);
-        
-        controller.removeListener(listener);
 
         while (System.currentTimeMillis() < end) {
 
         }
+        
+        controller.removeListener(listener);
 
     }
 
