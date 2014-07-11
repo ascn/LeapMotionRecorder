@@ -24,7 +24,7 @@ public class AuthenticateListener extends Listener {
 
 		CSVWriter writer = null;
             try {
-                writer = new CSVWriter(new FileWriter(fileName), '\t');
+                writer = new CSVWriter(new FileWriter(fileName), ',', CSVWriter.NO_QUOTE_CHARACTER);
             } catch (IOException ex) {
                 Logger.getLogger(AuthenticateListener.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -189,7 +189,7 @@ public class AuthenticateListener extends Listener {
 
         try {
             // Write data to the next row of the csv
-            writer = new CSVWriter(new FileWriter(fileName), '\t');
+            writer = new CSVWriter(new FileWriter(fileName), ',', CSVWriter.NO_QUOTE_CHARACTER);
         } catch (IOException ex) {
             Logger.getLogger(AuthenticateListener.class.getName()).log(Level.SEVERE, null, ex);
         }
