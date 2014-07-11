@@ -2,9 +2,6 @@ package leapmotionauthentication;
 
 import java.io.IOException;
 import com.leapmotion.leap.*;
-import au.com.bytecode.opencsv.CSVWriter;
-import java.io.FileWriter;
-import java.util.Scanner;
 
 /**
  *
