@@ -7,6 +7,7 @@ import com.leapmotion.leap.*;
  *
  * @author achan
  */
+
 public class LeapMotionAuthentication {
 
     /**
