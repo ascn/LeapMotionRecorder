@@ -2,7 +2,7 @@ package leapmotionauthentication;
 
 import com.leapmotion.leap.*;
 import java.util.Scanner;
-import au.com.bytecode.opencsv.*;
+import au.com.bytecode.opencsv.CSVWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -75,129 +75,131 @@ public class AuthenticateListener extends Listener {
     
         @Override
 	public void onFrame(Controller controller) {
-		
-		String[] data = new String[134];
+            FileWriter mFileWriter = null;
+            try {
+                String[] data = new String[134];
 
-		// Get latest frame
-		Frame currentFrame = Features.getFrame(controller);
+                // Get latest frame
+                Frame currentFrame = Features.getFrame(controller);
 
-		// Retrieve essential data
-		Long timestamp        = Features.getTimestamp(controller);
-		int numHands          = Features.countHands(controller);
-		float[] handWidths    = Features.getHandWidths(controller);
-		float[] orientation   = Features.getRotDir(controller);
-		float[] handVel       = Features.getHandVel(controller);
-		float[] grabStrength  = Features.getGrabStrength(controller);
-		float[] pinchStrength = Features.getPinchStrength(controller);
-		float[] armWidth      = Features.getArmWidth(controller);
-		float[] fingLen       = Features.getFingLen(controller);
-		float[] fingWid       = Features.getFingWid(controller);
-		float[] fingVel       = Features.getFingVel(controller);
-		float[] boneLen       = Features.getBoneLen(controller);
-		float[] boneWid       = Features.getBoneWidth(controller);
-		float[] gestProp      = Features.getGestProp(controller);
+                // Retrieve essential data
+                Long timestamp        = Features.getTimestamp(controller);
+                int numHands          = Features.countHands(controller);
+                float[] handWidths    = Features.getHandWidths(controller);
+                float[] orientation   = Features.getRotDir(controller);
+                float[] handVel       = Features.getHandVel(controller);
+                float[] grabStrength  = Features.getGrabStrength(controller);
+                float[] pinchStrength = Features.getPinchStrength(controller);
+                float[] armWidth      = Features.getArmWidth(controller);
+                float[] fingLen       = Features.getFingLen(controller);
+                float[] fingWid       = Features.getFingWid(controller);
+                float[] fingVel       = Features.getFingVel(controller);
+                float[] boneLen       = Features.getBoneLen(controller);
+                float[] boneWid       = Features.getBoneWidth(controller);
+                float[] gestProp      = Features.getGestProp(controller);
 
-		// Write timestamp to data
-		data[0] = String.valueOf(timestamp);
-
-		// Write number of hands to data
-		data[1] = String.valueOf(numHands);
-
-		// Write hand width to data
-		data[2] = String.valueOf(handWidths[0]);
-		data[10] = String.valueOf(handWidths[1]);
-
-		// Write pitch, yaw, and roll to data
-		data[3] = String.valueOf(orientation[0]);
-		data[4] = String.valueOf(orientation[1]);
-		data[5] = String.valueOf(orientation[2]);
-		data[11] = String.valueOf(orientation[3]);
-		data[12] = String.valueOf(orientation[4]);
-		data[13] = String.valueOf(orientation[5]);
-
-		// Write hand velocity to data
-		data[6] = String.valueOf(handVel[0]);
-		data[14] = String.valueOf(handVel[1]);
-
-		// Write grab strength to data
-		data[7] = String.valueOf(grabStrength[0]);
-		data[15] = String.valueOf(grabStrength[1]);
-
-		// Write pinch strength to data
-		data[8] = String.valueOf(pinchStrength[0]);
-		data[16] = String.valueOf(pinchStrength[1]);
-
-		// Write arm width to data
-		data[9] = String.valueOf(armWidth[0]);
-		data[17] = String.valueOf(armWidth[1]);
-
-		// Write finger lengths to data
-		for (int i = 0; i < 5; i++) {
-			data[i + 18] = String.valueOf(fingLen[i]);
-		}
-		for (int i = 0; i < 5; i++) {
-			data[i + 33] = String.valueOf(fingLen[i + 5]);
-		}
-
-		// Write finger widths to data
-		for (int i = 0; i < 5; i++) {
-			data[i + 23] = String.valueOf(fingWid[i]);
-		}
-		for (int i = 0; i < 5; i++) {
-			data[i + 38] = String.valueOf(fingWid[i + 5]);
-		}
-
-		// Write finger velocities to data
-		for (int i = 0; i < 5; i++) {
-			data[i + 28] = String.valueOf(fingVel[i]);
-		}
-		for (int i = 0; i < 5; i++) {
-			data[i + 43] = String.valueOf(fingVel[i + 5]);
-		}
-
-		// Write bone lengths to data
-		for (int i = 0; i < 20; i++) {
-			data[i + 48] = String.valueOf(boneLen[i]);
-		}
-		for (int i = 0; i < 20; i++) {
-			data[i + 68] = String.valueOf(boneLen[i + 20]);
-		}
-
-		// Write bone widths to data
-		for (int i = 0; i < 20; i++) {
-			data[i + 87] = String.valueOf(boneWid[i]);
-		}
-		for (int i = 0; i < 20; i++) {
-			data[i + 107] = String.valueOf(boneWid[i + 20]);
-		}
-
-		// Write gesture info to data
-		String type = String.valueOf(gestProp[0]);
-		switch (type) {
-			case "0": //circle
-				data[126] = String.valueOf(gestProp[1]);
-				data[127] = String.valueOf(gestProp[2]);
-			case "1": //swipe
-				data[128] = String.valueOf(gestProp[1]);
-				data[129] = String.valueOf(gestProp[2]);
-			case "2": //screenTap
-				data[130] = String.valueOf(gestProp[1]);
-				data[131] = String.valueOf(gestProp[2]);
-			case "3": //keyTap
-				data[132] = String.valueOf(gestProp[1]);
-				data[133] = String.valueOf(gestProp[2]);
-		}
-
-		CSVWriter writer = null;
-
-        try {
-            // Write data to the next row of the csv
-            writer = new CSVWriter(new FileWriter(fileName), ',', CSVWriter.NO_QUOTE_CHARACTER);
-        } catch (IOException ex) {
-            Logger.getLogger(AuthenticateListener.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        writer.writeNext(data);
+                // Write timestamp to data
+                data[0] = String.valueOf(timestamp);
+                
+                // Write number of hands to data
+                data[1] = String.valueOf(numHands);
+                
+                // Write hand width to data
+                data[2] = String.valueOf(handWidths[0]);
+                data[10] = String.valueOf(handWidths[1]);
+                
+                // Write pitch, yaw, and roll to data
+                data[3] = String.valueOf(orientation[0]);
+                data[4] = String.valueOf(orientation[1]);
+                data[5] = String.valueOf(orientation[2]);
+                data[11] = String.valueOf(orientation[3]);
+                data[12] = String.valueOf(orientation[4]);
+                data[13] = String.valueOf(orientation[5]);
+                
+                // Write hand velocity to data
+                data[6] = String.valueOf(handVel[0]);
+                data[14] = String.valueOf(handVel[1]);
+                
+                // Write grab strength to data
+                data[7] = String.valueOf(grabStrength[0]);
+                data[15] = String.valueOf(grabStrength[1]);
+                
+                // Write pinch strength to data
+                data[8] = String.valueOf(pinchStrength[0]);
+                data[16] = String.valueOf(pinchStrength[1]);
+                
+                // Write arm width to data
+                data[9] = String.valueOf(armWidth[0]);
+                data[17] = String.valueOf(armWidth[1]);
+                
+                // Write finger lengths to data
+                for (int i = 0; i < 5; i++) {
+                    data[i + 18] = String.valueOf(fingLen[i]);
+                }
+                for (int i = 0; i < 5; i++) {
+                    data[i + 33] = String.valueOf(fingLen[i + 5]);
+                }
+                
+                // Write finger widths to data
+                for (int i = 0; i < 5; i++) {
+                    data[i + 23] = String.valueOf(fingWid[i]);
+                }
+                for (int i = 0; i < 5; i++) {
+                    data[i + 38] = String.valueOf(fingWid[i + 5]);
+                }
+                
+                // Write finger velocities to data
+                for (int i = 0; i < 5; i++) {
+                    data[i + 28] = String.valueOf(fingVel[i]);
+                }
+                for (int i = 0; i < 5; i++) {
+                    data[i + 43] = String.valueOf(fingVel[i + 5]);
+                }
+                
+                // Write bone lengths to data
+                for (int i = 0; i < 20; i++) {
+                    data[i + 48] = String.valueOf(boneLen[i]);
+                }
+                for (int i = 0; i < 20; i++) {
+                    data[i + 68] = String.valueOf(boneLen[i + 20]);
+                }
+                
+                // Write bone widths to data
+                for (int i = 0; i < 20; i++) {
+                    data[i + 87] = String.valueOf(boneWid[i]);
+                }
+                for (int i = 0; i < 20; i++) {
+                    data[i + 107] = String.valueOf(boneWid[i + 20]);
+                }
+                
+                // Write gesture info to data
+                String type = String.valueOf(gestProp[0]);
+                switch (type) {
+                    case "0": //circle
+                        data[126] = String.valueOf(gestProp[1]);
+                        data[127] = String.valueOf(gestProp[2]);
+                    case "1": //swipe
+                        data[128] = String.valueOf(gestProp[1]);
+                        data[129] = String.valueOf(gestProp[2]);
+                    case "2": //screenTap
+                        data[130] = String.valueOf(gestProp[1]);
+                        data[131] = String.valueOf(gestProp[2]);
+                    case "3": //keyTap
+                        data[132] = String.valueOf(gestProp[1]);
+                        data[133] = String.valueOf(gestProp[2]);
+                }
+                mFileWriter = new FileWriter(fileName, true);
+                CSVWriter mCSVWriter = new CSVWriter(mFileWriter);
+                mCSVWriter.writeNext(data);
+            } catch (IOException ex) {
+                Logger.getLogger(AuthenticateListener.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    mFileWriter.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(AuthenticateListener.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 
 	}
 
