@@ -19,6 +19,7 @@ public class AuthenticateListener extends Listener {
 
         @Override
 	public void onInit(Controller controller) {
+		System.out.println("Initialized");
 		Scanner in = new Scanner(System.in);
 
 		System.out.println("Input file name: ");
@@ -72,6 +73,21 @@ public class AuthenticateListener extends Listener {
             }
 
 	}
+
+        @Override
+	public void onConnect(Controller controller) {
+		System.out.println("Connected");
+	}
+
+        @Override
+	public void onDisconnect(Controller controller) {
+		System.out.println("Disconnected");
+	}
+
+        @Override
+	public void onExit(Controller controller) {
+		System.out.println("Exited");
+	}
     
         @Override
 	public void onFrame(Controller controller) {
@@ -81,6 +97,11 @@ public class AuthenticateListener extends Listener {
 
                 // Get latest frame
                 Frame currentFrame = Features.getFrame(controller);
+
+                // For debugging purposes
+                System.out.println("Frame ID: " + currentFrame.id());
+                System.out.println("Timestamp: " + currentFrame.timestamp());
+                System.out.println("numHands: " + currentFrame.hands().count());
 
                 // Retrieve essential data
                 Long timestamp        = Features.getTimestamp(controller);
