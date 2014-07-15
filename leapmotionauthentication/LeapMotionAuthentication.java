@@ -23,7 +23,7 @@ public class LeapMotionAuthentication {
         // Initialize controller and listener
         AuthenticateListener listener = new AuthenticateListener();
         Controller controller = new Controller();
-        Features.initialize(controller, listener);
+        controller.addListener(listener);
 
         while (System.currentTimeMillis() < end) {
 

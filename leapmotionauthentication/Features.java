@@ -8,17 +8,6 @@ import com.leapmotion.leap.*;
  */
 
 public class Features {
-    
-    public static void initialize(Controller controller, Listener listener) {        
-        controller.addListener(listener);
-        controller.enableGesture(Gesture.Type.TYPE_SWIPE);
-        controller.enableGesture(Gesture.Type.TYPE_CIRCLE);
-        controller.enableGesture(Gesture.Type.TYPE_KEY_TAP);
-        controller.enableGesture(Gesture.Type.TYPE_SCREEN_TAP);
-        if (controller.policyFlags() != Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES) {
-            controller.setPolicyFlags(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
-        }
-    }
 
     // Returns the latest frame
     public static Frame getFrame(Controller controller) {        

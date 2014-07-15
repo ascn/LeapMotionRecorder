@@ -20,6 +20,15 @@ public class AuthenticateListener extends Listener {
         @Override
 	public void onInit(Controller controller) {
 		System.out.println("Initialized");
+
+        controller.enableGesture(Gesture.Type.TYPE_SWIPE);
+        controller.enableGesture(Gesture.Type.TYPE_CIRCLE);
+        controller.enableGesture(Gesture.Type.TYPE_KEY_TAP);
+        controller.enableGesture(Gesture.Type.TYPE_SCREEN_TAP);
+        if (controller.policyFlags() != Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES) {
+            controller.setPolicyFlags(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
+        }
+        
 		Scanner in = new Scanner(System.in);
 
 		System.out.println("Input file name: ");
