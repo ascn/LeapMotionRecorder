@@ -397,7 +397,7 @@ public class Features {
         GestureList allGestures = currentFrame.gestures();
         Gesture gesture;
         float[] gestProp = {0, 0, 0};
-        int type;
+        float type;
         float radius;
         float dir;
         float elapTime;
