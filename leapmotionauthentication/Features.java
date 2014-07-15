@@ -79,9 +79,9 @@ public class Features {
                 rotDir[2] = roll;
             }
             else {
-                rotDir[4] = pitch;
-                rotDir[5] = yaw;
-                rotDir[6] = roll;
+                rotDir[3] = pitch;
+                rotDir[4] = yaw;
+                rotDir[5] = roll;
             }
         }
         return rotDir;
@@ -289,7 +289,7 @@ public class Features {
                 allFingers = hand.fingers();
                 for (int j = 0; j < allFingers.count(); j++) {
                     finger = allFingers.get(j);
-                    for (Bone.Type boneType : Bone.Type.values()) { // Problem: BONE.TYPE IS NOT INT, CANNOT BE CAST TO INT
+                    for (Bone.Type boneType : Bone.Type.values()) {
                         bone = finger.bone(boneType);
                         length = bone.length();
                         switch (boneType) {
