@@ -28,7 +28,7 @@ public class AuthenticateListener extends Listener {
         if (controller.policyFlags() != Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES) {
             controller.setPolicyFlags(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
         }
-        
+
 		Scanner in = new Scanner(System.in);
 
 		System.out.println("Input file name: ");
@@ -72,7 +72,7 @@ public class AuthenticateListener extends Listener {
                 + " # wid_LBint1 # wid_LBint2 # wid_LBint3 # wid_LBint4"
                 + " # wid_LBint5 # wid_LBdist1 # wid_LBdist2 # wid_LBdist3"
                 + " # wid_LBdist4 # wid_LBdist5 # gest_circRad # gest_circVel"
-                + " # gest_swipeDir # gest_swipeVel # gest_KTapDir  # gest_KTime # gest_STapDir # gest_STime ";
+                + " # gest_swipeDir # gest_swipeVel # gest_KTapDir # gest_KTime # gest_STapDir # gest_STime ";
 
         String[] header = headerStr.split(" # ");
         writer.writeNext(header);
