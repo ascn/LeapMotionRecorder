@@ -3,3 +3,5 @@
 *.dylib
 *.dll
 .DS_Store/
+*.class
+*.jar
