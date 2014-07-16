@@ -30,12 +30,12 @@ public class Features {
 
     // Returns a float array with the width of the palm in millimeters
     // The first element is the right hand
-    public static float[] getHandWidths(Controller controller) {
+    public static Float[] getHandWidths(Controller controller) {
         Frame currentFrame = controller.frame();
         HandList allHands = currentFrame.hands();
         Hand hand;
-        float wid;
-        float[] handWidths = {0, 0};
+        Float wid;
+        Float[] handWidths = {null, null};
         for (int i = 0; i < allHands.count(); i++) {
             hand = allHands.get(i);
             wid = hand.palmWidth();
@@ -51,12 +51,12 @@ public class Features {
 
     // Returns a float array of the pitch, yaw, and roll in that order
     // First three elements are the right hand
-    public static float[] getRotDir(Controller controller) {
+    public static Float[] getRotDir(Controller controller) {
         Frame currentFrame = controller.frame();
         HandList allHands = currentFrame.hands();
         Hand hand;
-        float pitch, yaw, roll;
-        float[] rotDir = {0, 0, 0, 0, 0, 0};
+        Float pitch, yaw, roll;
+        Float[] rotDir = {null, null, null, null, null, null};
         for (int i = 0; i < allHands.count(); i++) {
             hand = allHands.get(i);
             pitch = hand.direction().pitch();
@@ -78,13 +78,13 @@ public class Features {
 
     // Returns a float array of the speed of the hands in millimeters per second
     // First element is the right hand
-    public static float[] getHandVel(Controller controller) {
+    public static Float[] getHandVel(Controller controller) {
         Frame currentFrame = controller.frame();
         HandList allHands = currentFrame.hands();
         Hand hand;
         Vector vel;
-        float velMag;
-        float[] handVel = {0, 0};
+        Float velMag;
+        Float[] handVel = {null, null};
         for (int i = 0; i < allHands.count(); i++) {
             hand = allHands.get(i);
             vel = hand.palmVelocity();
@@ -101,12 +101,12 @@ public class Features {
 
     // Returns a float array of the grab strength
     // First element is the right hand
-    public static float[] getGrabStrength(Controller controller) {
+    public static Float[] getGrabStrength(Controller controller) {
         Frame currentFrame = controller.frame();
         HandList allHands = currentFrame.hands();
         Hand hand;
-        float handGrab;
-        float[] grabStrengths = {0, 0};
+        Float handGrab;
+        Float[] grabStrengths = {null, null};
         for (int i = 0; i < allHands.count(); i++) {
             hand = allHands.get(i);
             handGrab = hand.grabStrength();
@@ -122,12 +122,12 @@ public class Features {
 
     // Returns a float array of the pinch strength
     // First element is the right hand
-    public static float[] getPinchStrength(Controller controller) {
+    public static Float[] getPinchStrength(Controller controller) {
         Frame currentFrame = controller.frame();
         HandList allHands = currentFrame.hands();
         Hand hand;
-        float handPinch;
-        float[] pinchStrengths = {0, 0};
+        Float handPinch;
+        Float[] pinchStrengths = {null, null};
         for (int i = 0; i < allHands.count(); i++) {
             hand = allHands.get(i);
             handPinch = hand.pinchStrength();
@@ -143,13 +143,13 @@ public class Features {
 
     // Returns a float array of the width of the forearm
     // First element is the right arm
-    public static float[] getArmWidth(Controller controller) {
+    public static Float[] getArmWidth(Controller controller) {
         Frame currentFrame = controller.frame();
         HandList allHands = currentFrame.hands();
         Hand hand;
         Arm arm;
-        float armWidth;
-        float[] armWidths = {0, 0};
+        Float armWidth;
+        Float[] armWidths = {null, null};
         for (int i = 0; i < allHands.count(); i++) {
             hand = allHands.get(i);
             arm = hand.arm();
@@ -167,14 +167,14 @@ public class Features {
     // Returns a float array of the lengths of each finger
     // First five elements are the right hand
     // The order goes from thumb to pinky
-    public static float[] getFingLen(Controller controller) {
+    public static Float[] getFingLen(Controller controller) {
         Frame currentFrame = controller.frame();
         HandList allHands = currentFrame.hands();
         Hand hand;
         FingerList allFingers;
         Finger finger;
-        float fingerLength;
-        float[] fingLen = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        Float fingerLength;
+        Float[] fingLen = {null, null, null, null, null, null, null, null, null, null};
         for (int i = 0; i < allHands.count(); i++) {
             hand = allHands.get(i);
             if (hand.isRight() == true) {
@@ -200,14 +200,14 @@ public class Features {
     // Returns a float array of the widths of each finger
     // First five elements are the right hand
     // The order goes from thumb to pinky
-    public static float[] getFingWid(Controller controller) {
+    public static Float[] getFingWid(Controller controller) {
         Frame currentFrame = controller.frame();
         HandList allHands = currentFrame.hands();
         Hand hand;
         FingerList allFingers;
         Finger finger;
-        float fingerWidth;
-        float[] fingWid = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        Float fingerWidth;
+        Float[] fingWid = {null, null, null, null, null, null, null, null, null, null};
         for (int i = 0; i < allHands.count(); i++) {
             hand = allHands.get(i);
             if (hand.isRight() == true) {
@@ -230,15 +230,15 @@ public class Features {
         return fingWid;
     }
 
-    public static float[] getFingVel(Controller controller) {
+    public static Float[] getFingVel(Controller controller) {
         Frame currentFrame = controller.frame();
         HandList allHands = currentFrame.hands();
         Hand hand;
         FingerList allFingers;
         Finger finger;
         Vector vel;
-        float velMag;
-        float[] fingVel = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        Float velMag;
+        Float[] fingVel = {null, null, null, null, null, null, null, null, null, null};
         for (int i = 0; i < allHands.count(); i++) {
             hand = allHands.get(i);
             if (hand.isRight() == true) {
@@ -263,15 +263,15 @@ public class Features {
         return fingVel;
     }
 
-    public static float[] getBoneLen(Controller controller) {
+    public static Float[] getBoneLen(Controller controller) {
         Frame currentFrame = controller.frame();
         HandList allHands = currentFrame.hands();
         Hand hand;
         FingerList allFingers;
         Finger finger;
         Bone bone;
-        float length;
-        float[] boneLen = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        Float length;
+        Float[] boneLen = {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null};
         for (int i = 0; i < allHands.count(); i++) {
             hand = allHands.get(i);
             if (hand.isRight() == true) {
@@ -318,15 +318,15 @@ public class Features {
         return boneLen;
     }
 
-    public static float[] getBoneWidth(Controller controller) {
+    public static Float[] getBoneWidth(Controller controller) {
         Frame currentFrame = controller.frame();
         HandList allHands = currentFrame.hands();
         Hand hand;
         FingerList allFingers;
         Finger finger;
         Bone bone;
-        float width;
-        float[] boneWidth = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        Float width;
+        Float[] boneWidth = {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null};
         for (int i = 0; i < allHands.count(); i++) {
             hand = allHands.get(i);
             if (hand.isRight() == true) {
@@ -381,50 +381,47 @@ public class Features {
     // First element is type
     // For a circle: second element is radius
     // Second element is magnitude of direction vector and duration of gesture
-    public static float[] getGestProp(Controller controller) {
+    public static Float[] getGestProp(Controller controller) {
         Frame currentFrame = controller.frame();
         GestureList allGestures = currentFrame.gestures();
         Gesture gesture;
-        float[] gestProp = {0, 0, 0};
-        float type;
-        float radius;
-        float dir;
-        float elapTime;
+        Float[] gestProp = {null, null, null};
+        Float type, radius, dir, elapTime;
         for (int i = 0; i < allGestures.count(); i++) {
             gesture = allGestures.get(i);
             switch (gesture.type()) {
                 case TYPE_CIRCLE:
-                    type = 0;
+                    type = (float) 0;
                     CircleGesture circle = new CircleGesture(gesture);
                     radius = circle.radius();
-                    elapTime = circle.duration();
+                    elapTime = (float) circle.duration();
                     gestProp[0] = type;
                     gestProp[1] = radius;
                     gestProp[2] = elapTime;
                 case TYPE_SWIPE:
-                    type = 1;
+                    type = (float) 1;
                     SwipeGesture swipe = new SwipeGesture(gesture);
                     Vector swipeDirection = swipe.direction();
                     dir = swipeDirection.magnitude();
-                    elapTime = swipe.duration();
+                    elapTime = (float) swipe.duration();
                     gestProp[0] = type;
                     gestProp[1] = dir;
                     gestProp[2] = elapTime;
                 case TYPE_SCREEN_TAP:
-                    type = 2;
+                    type = (float) 2;
                     ScreenTapGesture screenTap = new ScreenTapGesture(gesture);
                     Vector tapDirection = screenTap.direction();
                     dir = tapDirection.magnitude();
-                    elapTime = screenTap.duration();
+                    elapTime = (float) screenTap.duration();
                     gestProp[0] = type;
                     gestProp[1] = dir;
                     gestProp[2] = elapTime;
                 case TYPE_KEY_TAP:
-                    type = 3;
+                    type = (float) 3;
                     KeyTapGesture keyTap = new KeyTapGesture(gesture);
                     tapDirection = keyTap.direction();
                     dir = tapDirection.magnitude();
-                    elapTime = keyTap.duration();
+                    elapTime = (float) keyTap.duration();
                     gestProp[0] = type;
                     gestProp[1] = dir;
                     gestProp[2] = elapTime;

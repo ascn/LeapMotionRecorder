@@ -61,7 +61,7 @@ public class AuthenticateListener extends Listener {
                 + " # len_LBprox2 # len_LBprox3 # len_LBprox4 # len_LBprox5"
                 + " # len_LBint1 # len_LBint2 # len_LBint3 # len_LBint4"
                 + " # len_LBint5 # len_LBdist1 # len_LBdist2 # len_LBdist3"
-                + " # len_LBdist4 # len_LBdist5  # wid_RBmet1 # wid_RBmet2"
+                + " # len_LBdist4 # len_LBdist5 # wid_RBmet1 # wid_RBmet2"
                 + " # wid_RBmet3 # wid_RBmet4 # wid_RBmet5 # wid_RBprox1"
                 + " # wid_RBprox2 # wid_RBprox3 # wid_RBprox4 # wid_RBprox5"
                 + " # wid_RBint1 # wid_RBint2 # wid_RBint3 # wid_RBint4"
@@ -72,7 +72,8 @@ public class AuthenticateListener extends Listener {
                 + " # wid_LBint1 # wid_LBint2 # wid_LBint3 # wid_LBint4"
                 + " # wid_LBint5 # wid_LBdist1 # wid_LBdist2 # wid_LBdist3"
                 + " # wid_LBdist4 # wid_LBdist5 # gest_circRad # gest_circVel"
-                + " # gest_swipeDir # gest_swipeVel # gest_KTapDir # gest_KTime # gest_STapDir # gest_STime ";
+                + " # gest_swipeDir # gest_swipeVel # gest_STapDir # gest_STime"
+                + " # gest_KTapDir # gest_KTime ";
 
         String[] header = headerStr.split(" # ");
         writer.writeNext(header);
@@ -81,6 +82,14 @@ public class AuthenticateListener extends Listener {
             } catch (IOException ex) {
                 Logger.getLogger(AuthenticateListener.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+        long pauseTime = 5000;
+        long startTime = System.currentTimeMillis();
+        long endTime = startTime + pauseTime;
+        System.out.println("Starting collection in " + pauseTime / 1000 + " seconds");
+
+        while (System.currentTimeMillis() < endTime) {
+        }
 
 	}
 
@@ -115,109 +124,141 @@ public class AuthenticateListener extends Listener {
             // Retrieve essential data
             Long timestamp        = Features.getTimestamp(controller);
             int numHands          = Features.countHands(controller);
-            float[] handWidths    = Features.getHandWidths(controller);
-            float[] orientation   = Features.getRotDir(controller);
-            float[] handVel       = Features.getHandVel(controller);
-            float[] grabStrength  = Features.getGrabStrength(controller);
-            float[] pinchStrength = Features.getPinchStrength(controller);
-            float[] armWidth      = Features.getArmWidth(controller);
-            float[] fingLen       = Features.getFingLen(controller);
-            float[] fingWid       = Features.getFingWid(controller);
-            float[] fingVel       = Features.getFingVel(controller);
-            float[] boneLen       = Features.getBoneLen(controller);
-            float[] boneWid       = Features.getBoneWidth(controller);
-            float[] gestProp      = Features.getGestProp(controller);
+            Float[] handWidths    = Features.getHandWidths(controller);
+            Float[] orientation   = Features.getRotDir(controller);
+            Float[] handVel       = Features.getHandVel(controller);
+            Float[] grabStrength  = Features.getGrabStrength(controller);
+            Float[] pinchStrength = Features.getPinchStrength(controller);
+            Float[] armWidth      = Features.getArmWidth(controller);
+            Float[] fingLen       = Features.getFingLen(controller);
+            Float[] fingWid       = Features.getFingWid(controller);
+            Float[] fingVel       = Features.getFingVel(controller);
+            Float[] boneLen       = Features.getBoneLen(controller);
+            Float[] boneWid       = Features.getBoneWidth(controller);
+            Float[] gestProp      = Features.getGestProp(controller);
 
             // Write timestamp to data
-            data[0] = String.valueOf(timestamp);
+            data[0] = String.valueOf((Object) timestamp);
             
             // Write number of hands to data
-            data[1] = String.valueOf(numHands);
+            data[1] = String.valueOf((Object) numHands);
             
             // Write hand width to data
-            data[2] = String.valueOf(handWidths[0]);
-            data[10] = String.valueOf(handWidths[1]);
+            data[2] = String.valueOf((Object) handWidths[0]);
+            data[10] = String.valueOf((Object) handWidths[1]);
             
             // Write pitch, yaw, and roll to data
-            data[3] = String.valueOf(orientation[0]);
-            data[4] = String.valueOf(orientation[1]);
-            data[5] = String.valueOf(orientation[2]);
-            data[11] = String.valueOf(orientation[3]);
-            data[12] = String.valueOf(orientation[4]);
-            data[13] = String.valueOf(orientation[5]);
+            data[3] = String.valueOf((Object) orientation[0]);
+            data[4] = String.valueOf((Object) orientation[1]);
+            data[5] = String.valueOf((Object) orientation[2]);
+            data[11] = String.valueOf((Object) orientation[3]);
+            data[12] = String.valueOf((Object) orientation[4]);
+            data[13] = String.valueOf((Object) orientation[5]);
             
             // Write hand velocity to data
-            data[6] = String.valueOf(handVel[0]);
-            data[14] = String.valueOf(handVel[1]);
+            data[6] = String.valueOf((Object) handVel[0]);
+            data[14] = String.valueOf((Object) handVel[1]);
             
             // Write grab strength to data
-            data[7] = String.valueOf(grabStrength[0]);
-            data[15] = String.valueOf(grabStrength[1]);
+            data[7] = String.valueOf((Object) grabStrength[0]);
+            data[15] = String.valueOf((Object) grabStrength[1]);
             
             // Write pinch strength to data
-            data[8] = String.valueOf(pinchStrength[0]);
-            data[16] = String.valueOf(pinchStrength[1]);
+            data[8] = String.valueOf((Object) pinchStrength[0]);
+            data[16] = String.valueOf((Object) pinchStrength[1]);
             
             // Write arm width to data
-            data[9] = String.valueOf(armWidth[0]);
-            data[17] = String.valueOf(armWidth[1]);
+            data[9] = String.valueOf((Object) armWidth[0]);
+            data[17] = String.valueOf((Object) armWidth[1]);
             
             // Write finger lengths to data
             for (int i = 0; i < 5; i++) {
-                data[i + 18] = String.valueOf(fingLen[i]);
+                data[i + 18] = String.valueOf((Object) fingLen[i]);
             }
             for (int i = 0; i < 5; i++) {
-                data[i + 33] = String.valueOf(fingLen[i + 5]);
+                data[i + 33] = String.valueOf((Object) fingLen[i + 5]);
             }
             
             // Write finger widths to data
             for (int i = 0; i < 5; i++) {
-                data[i + 23] = String.valueOf(fingWid[i]);
+                data[i + 23] = String.valueOf((Object) fingWid[i]);
             }
             for (int i = 0; i < 5; i++) {
-                data[i + 38] = String.valueOf(fingWid[i + 5]);
+                data[i + 38] = String.valueOf((Object) fingWid[i + 5]);
             }
             
             // Write finger velocities to data
             for (int i = 0; i < 5; i++) {
-                data[i + 28] = String.valueOf(fingVel[i]);
+                data[i + 28] = String.valueOf((Object) fingVel[i]);
             }
             for (int i = 0; i < 5; i++) {
-                data[i + 43] = String.valueOf(fingVel[i + 5]);
+                data[i + 43] = String.valueOf((Object) fingVel[i + 5]);
             }
             
             // Write bone lengths to data
             for (int i = 0; i < 20; i++) {
-                data[i + 48] = String.valueOf(boneLen[i]);
+                data[i + 48] = String.valueOf((Object) boneLen[i]);
             }
             for (int i = 0; i < 20; i++) {
-                data[i + 68] = String.valueOf(boneLen[i + 20]);
+                data[i + 68] = String.valueOf((Object) boneLen[i + 20]);
             }
             
             // Write bone widths to data
             for (int i = 0; i < 20; i++) {
-                data[i + 88] = String.valueOf(boneWid[i]);
+                data[i + 88] = String.valueOf((Object) boneWid[i]);
             }
             for (int i = 0; i < 20; i++) {
-                data[i + 108] = String.valueOf(boneWid[i + 20]);
+                data[i + 108] = String.valueOf((Object) boneWid[i + 20]);
             }
             
             // Write gesture info to data
-            int type = (int) gestProp[0];
-            switch (type) {
-                case 0: //circle
-                    data[128] = String.valueOf(gestProp[1]);
-                    data[129] = String.valueOf(gestProp[2]);
-                case 1: //swipe
-                    data[130] = String.valueOf(gestProp[1]);
-                    data[131] = String.valueOf(gestProp[2]);
-                case 2: //screenTap
-                    data[132] = String.valueOf(gestProp[1]);
-                    data[133] = String.valueOf(gestProp[2]);
-                case 3: //keyTap
-                    data[134] = String.valueOf(gestProp[1]);
-                    data[135] = String.valueOf(gestProp[2]);
+            if (gestProp[0] == null) {
+                for (int i = 128; i < 136; i++) {
+                    data[i] = String.valueOf((Object) null);
+                }
             }
+            else {
+                int type = gestProp[0].intValue();
+                switch (type) {
+                    case 0:
+                        data[128] = String.valueOf((Object) gestProp[1]);
+                        data[129] = String.valueOf((Object) gestProp[2]);
+                        data[130] = "null";
+                        data[131] = "null";
+                        data[132] = "null";
+                        data[133] = "null";
+                        data[134] = "null";
+                        data[135] = "null";
+                    case 1:
+                        data[128] = "null";
+                        data[129] = "null";
+                        data[130] = String.valueOf((Object) gestProp[1]);
+                        data[131] = String.valueOf((Object) gestProp[2]);
+                        data[132] = "null";
+                        data[133] = "null";
+                        data[134] = "null";
+                        data[135] = "null";
+                    case 2:
+                        data[128] = "null";
+                        data[129] = "null";
+                        data[130] = "null";
+                        data[131] = "null";
+                        data[132] = String.valueOf((Object) gestProp[1]);
+                        data[133] = String.valueOf((Object) gestProp[2]);
+                        data[134] = "null";
+                        data[135] = "null";
+                    case 3:
+                        data[128] = "null";
+                        data[129] = "null";
+                        data[130] = "null";
+                        data[131] = "null";
+                        data[132] = "null";
+                        data[133] = "null";
+                        data[134] = String.valueOf((Object) gestProp[1]);
+                        data[135] = String.valueOf((Object) gestProp[2]);
+                }
+            }
+
             FileWriter mFileWriter = null;
             try {
                 mFileWriter = new FileWriter(fileName, true);
