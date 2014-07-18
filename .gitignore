@@ -1,7 +1,0 @@
-*.csv
-*.so
-*.dylib
-*.dll
-.DS_Store/
-*.class
-*.jar

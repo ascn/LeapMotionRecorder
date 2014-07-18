@@ -73,7 +73,7 @@ public class AuthenticateListener extends Listener {
                 + " # wid_LBint5 # wid_LBdist1 # wid_LBdist2 # wid_LBdist3"
                 + " # wid_LBdist4 # wid_LBdist5 # gest_circRad # gest_circVel"
                 + " # gest_swipeDir # gest_swipeVel # gest_STapDir # gest_STime"
-                + " # gest_KTapDir # gest_KTime ";
+                + " # gest_KTapDir # gest_KTime # RHConfidence # LHConfidence";
 
         String[] header = headerStr.split(" # ");
         writer.writeNext(header);
@@ -83,9 +83,10 @@ public class AuthenticateListener extends Listener {
                 Logger.getLogger(AuthenticateListener.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        long pauseTime = 5000;
+        long pauseTime = 2000;
         long startTime = System.currentTimeMillis();
         long endTime = startTime + pauseTime;
+        System.out.println("Hold both hands flat above the Leap Motion device");
         System.out.println("Starting collection in " + pauseTime / 1000 + " seconds");
 
         while (System.currentTimeMillis() < endTime) {
@@ -111,7 +112,7 @@ public class AuthenticateListener extends Listener {
         @Override
 	public void onFrame(Controller controller) {
 
-            String[] data = new String[136];
+            String[] data = new String[138];
 
             // Get latest frame
             Frame currentFrame = Features.getFrame(controller);
@@ -136,6 +137,7 @@ public class AuthenticateListener extends Listener {
             Float[] boneLen       = Features.getBoneLen(controller);
             Float[] boneWid       = Features.getBoneWidth(controller);
             Float[] gestProp      = Features.getGestProp(controller);
+            Float[] handCon       = Features.getHandConfidence(controller);
 
             // Write timestamp to data
             data[0] = String.valueOf((Object) timestamp);
@@ -258,6 +260,9 @@ public class AuthenticateListener extends Listener {
                         data[135] = String.valueOf((Object) gestProp[2]);
                 }
             }
+
+            data[136] = String.valueOf((Object) handCon[0]);
+            data[137] = String.valueOf((Object) handCon[1]);
 
             FileWriter mFileWriter = null;
             try {

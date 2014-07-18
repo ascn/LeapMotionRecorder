@@ -1,15 +1,9 @@
-Leap Motion Data Recorder
+LeapMotionRecorder
 =========================
 
-This project collects physical and gesture data from the Leap Motion device. Data are stored in a comma-separated value file.
+This project collects physical and gesture data from the Leap Motion device. Data are stored in a comma-separated value file. For operating system control, check out [LeapControl](https://github.com/alexanderchan97/LeapControl).
 
-Using the Recorder
-------------------
+##<a name="#usage"></a>Using the Recorder
+Download the `LeapSDK` from (developer.leapmotion.com). Place `LeapJava.jar` in the working directory as well as the appropriate libraries for your operating system.
 
-Download the `LeapSDK` from (developer.leapmotion.com). Place `LeapJava.jar` in the working directory as well as the appropriate libraries for your operating system (only Linux and OSX is supported at this time). Make sure the directory is in the path:
-
-```
-export LD_LIBRARY_PATH=/path/to/libraries
-```
-
-In a command line, run `leapData.sh`, which compiles the java files and runs the program, and input a file name to store the data. The file will be created in this directory.
+In a command line, run `leapData.sh` or `leapData.bar`, which compiles the java files and runs the program, and input a file name to store the data. Include the file extension (`.csv`).

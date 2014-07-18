@@ -384,50 +384,71 @@ public class Features {
     public static Float[] getGestProp(Controller controller) {
         Frame currentFrame = controller.frame();
         GestureList allGestures = currentFrame.gestures();
-        Gesture gesture;
         Float[] gestProp = {null, null, null};
-        Float type, radius, dir, elapTime;
-        for (int i = 0; i < allGestures.count(); i++) {
-            gesture = allGestures.get(i);
-            switch (gesture.type()) {
-                case TYPE_CIRCLE:
-                    type = (float) 0;
-                    CircleGesture circle = new CircleGesture(gesture);
-                    radius = circle.radius();
-                    elapTime = (float) circle.duration();
-                    gestProp[0] = type;
-                    gestProp[1] = radius;
-                    gestProp[2] = elapTime;
-                case TYPE_SWIPE:
-                    type = (float) 1;
-                    SwipeGesture swipe = new SwipeGesture(gesture);
-                    Vector swipeDirection = swipe.direction();
-                    dir = swipeDirection.magnitude();
-                    elapTime = (float) swipe.duration();
-                    gestProp[0] = type;
-                    gestProp[1] = dir;
-                    gestProp[2] = elapTime;
-                case TYPE_SCREEN_TAP:
-                    type = (float) 2;
-                    ScreenTapGesture screenTap = new ScreenTapGesture(gesture);
-                    Vector tapDirection = screenTap.direction();
-                    dir = tapDirection.magnitude();
-                    elapTime = (float) screenTap.duration();
-                    gestProp[0] = type;
-                    gestProp[1] = dir;
-                    gestProp[2] = elapTime;
-                case TYPE_KEY_TAP:
-                    type = (float) 3;
-                    KeyTapGesture keyTap = new KeyTapGesture(gesture);
-                    tapDirection = keyTap.direction();
-                    dir = tapDirection.magnitude();
-                    elapTime = (float) keyTap.duration();
-                    gestProp[0] = type;
-                    gestProp[1] = dir;
-                    gestProp[2] = elapTime;
+        if (allGestures.count() > 0) {
+            Gesture gesture;
+            Float type, radius, dir, elapTime;
+            for (int i = 0; i < allGestures.count(); i++) {
+                gesture = allGestures.get(i);
+                switch (gesture.type()) {
+                    case TYPE_CIRCLE:
+                        type = (float) 0;
+                        CircleGesture circle = new CircleGesture(gesture);
+                        radius = circle.radius();
+                        elapTime = (float) circle.duration();
+                        gestProp[0] = type;
+                        gestProp[1] = radius;
+                        gestProp[2] = elapTime;
+                    case TYPE_SWIPE:
+                        type = (float) 1;
+                        SwipeGesture swipe = new SwipeGesture(gesture);
+                        Vector swipeDirection = swipe.direction();
+                        dir = swipeDirection.magnitude();
+                        elapTime = (float) swipe.duration();
+                        gestProp[0] = type;
+                        gestProp[1] = dir;
+                        gestProp[2] = elapTime;
+                    case TYPE_SCREEN_TAP:
+                        type = (float) 2;
+                        ScreenTapGesture screenTap = new ScreenTapGesture(gesture);
+                        Vector tapDirection = screenTap.direction();
+                        dir = tapDirection.magnitude();
+                        elapTime = (float) screenTap.duration();
+                        gestProp[0] = type;
+                        gestProp[1] = dir;
+                        gestProp[2] = elapTime;
+                    case TYPE_KEY_TAP:
+                        type = (float) 3;
+                        KeyTapGesture keyTap = new KeyTapGesture(gesture);
+                        tapDirection = keyTap.direction();
+                        dir = tapDirection.magnitude();
+                        elapTime = (float) keyTap.duration();
+                        gestProp[0] = type;
+                        gestProp[1] = dir;
+                        gestProp[2] = elapTime;
+                }
             }
         }
         return gestProp;
+    }
+
+    public static Float[] getHandConfidence(Controller controller) {
+        Frame currentFrame = controller.frame();
+        HandList allHands = currentFrame.hands();
+        Hand hand;
+        Float handConfidence;
+        Float[] handCon = {null, null};
+        for (int i = 0; i < allHands.count(); i++) {
+            hand = allHands.get(i);
+            handConfidence = hand.confidence();
+            if (hand.isRight() == true) {
+                handCon[0] = handConfidence;
+            }
+            else {
+                handCon[1] = handConfidence;
+            }
+        }
+        return handCon;
     }
 
 }
