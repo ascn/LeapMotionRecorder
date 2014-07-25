@@ -136,7 +136,7 @@ public class AuthenticateListener extends Listener {
             Float[] fingVel       = Features.getFingVel(controller);
             Float[] boneLen       = Features.getBoneLen(controller);
             Float[] boneWid       = Features.getBoneWidth(controller);
-            Float[] circProp      = Features.getCircProp(controler);
+            Float[] circProp      = Features.getCircProp(controller);
             Float[] swipeProp     = Features.getSwipeProp(controller);
             Float[] screenProp    = Features.getScreenTapProp(controller);
             Float[] keyProp       = Features.getKeyTapProp(controller);
