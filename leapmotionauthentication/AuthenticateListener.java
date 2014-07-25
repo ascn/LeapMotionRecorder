@@ -83,7 +83,7 @@ public class AuthenticateListener extends Listener {
                 Logger.getLogger(AuthenticateListener.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        long pauseTime = 2000;
+        long pauseTime = 5000;
         long startTime = System.currentTimeMillis();
         long endTime = startTime + pauseTime;
         System.out.println("Hold both hands flat above the Leap Motion device");
@@ -136,7 +136,10 @@ public class AuthenticateListener extends Listener {
             Float[] fingVel       = Features.getFingVel(controller);
             Float[] boneLen       = Features.getBoneLen(controller);
             Float[] boneWid       = Features.getBoneWidth(controller);
-            Float[] gestProp      = Features.getGestProp(controller);
+            Float[] circProp      = Features.getCircProp;
+            Float[] swipeProp     = Features.getSwipeProp;
+            Float[] screenProp    = Features.getScreenTapProp;
+            Float[] keyProp       = Features.getKeyTapProp;
             Float[] handCon       = Features.getHandConfidence(controller);
 
             // Write timestamp to data
@@ -214,52 +217,15 @@ public class AuthenticateListener extends Listener {
             }
             
             // Write gesture info to data
-            if (gestProp[0] == null) {
-                for (int i = 128; i < 136; i++) {
-                    data[i] = String.valueOf((Object) null);
-                }
-            }
-            else {
-                int type = gestProp[0].intValue();
-                switch (type) {
-                    case 0:
-                        data[128] = String.valueOf((Object) gestProp[1]);
-                        data[129] = String.valueOf((Object) gestProp[2]);
-                        data[130] = "null";
-                        data[131] = "null";
-                        data[132] = "null";
-                        data[133] = "null";
-                        data[134] = "null";
-                        data[135] = "null";
-                    case 1:
-                        data[128] = "null";
-                        data[129] = "null";
-                        data[130] = String.valueOf((Object) gestProp[1]);
-                        data[131] = String.valueOf((Object) gestProp[2]);
-                        data[132] = "null";
-                        data[133] = "null";
-                        data[134] = "null";
-                        data[135] = "null";
-                    case 2:
-                        data[128] = "null";
-                        data[129] = "null";
-                        data[130] = "null";
-                        data[131] = "null";
-                        data[132] = String.valueOf((Object) gestProp[1]);
-                        data[133] = String.valueOf((Object) gestProp[2]);
-                        data[134] = "null";
-                        data[135] = "null";
-                    case 3:
-                        data[128] = "null";
-                        data[129] = "null";
-                        data[130] = "null";
-                        data[131] = "null";
-                        data[132] = "null";
-                        data[133] = "null";
-                        data[134] = String.valueOf((Object) gestProp[1]);
-                        data[135] = String.valueOf((Object) gestProp[2]);
-                }
-            }
+
+            data[128] = String.valueOf((Object) circProp[0]);
+            data[129] = String.valueOf((Object) circProp[1]);
+            data[130] = String.valueOf((Object) swipeProp[0]);
+            data[131] = String.valueOf((Object) swipeProp[1]);
+            data[132] = String.valueOf((Object) screenProp[0]);
+            data[133] = String.valueOf((Object) screenProp[1]);
+            data[134] = String.valueOf((Object) keyProp[0]);
+            data[135] = String.valueOf((Object) keyProp[1]);
 
             data[136] = String.valueOf((Object) handCon[0]);
             data[137] = String.valueOf((Object) handCon[1]);

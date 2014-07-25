@@ -16,7 +16,7 @@ public class LeapMotionAuthentication {
     public static void main(String[] args) throws IOException {
         
         // Set timer
-        long programTime = 900000; // milliseconds
+        long programTime = 90000; // milliseconds
         long start = System.currentTimeMillis();
         long end = start + programTime;
 

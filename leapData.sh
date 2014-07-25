@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Change to the path of the native libraries
-export LD_LIBRARY_PATH=/home/achan/Desktop/.developer/LeapMotionRecorder/
+export LD_LIBRARY_PATH=/home/achan/Desktop/.developer/Leap/LeapMotionRecorder/
 
 javac -classpath LeapJava.jar ./au/com/bytecode/opencsv/*.java ./leapmotionauthentication/*.java
 

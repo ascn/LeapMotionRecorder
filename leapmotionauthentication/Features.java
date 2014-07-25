@@ -373,6 +373,105 @@ public class Features {
         return boneWidth;
     }
 
+    public static Float[] getCircProp(Controller controller) {
+        Frame currentFrame = controller.frame();
+        GestureList allGestures = currentFrame.gestures();
+        Float[] circProp = {null, null};
+
+        if (allGestures.count() > 0) {
+            Gesture gesture;
+            Float radius, elapTime;
+            for (int i = 0; i < allGestures.count(); i++) {
+                gesture = allGestures.get(i);
+                switch (gesture.type()) {
+                    case TYPE_CIRCLE:
+                        CircleGesture circle = new CircleGesture(gesture);
+                        radius = circle.radius();
+                        elapTime = circle.durationSeconds();
+                        circProp[0] = radius;
+                        circProp[1] = elapTime;
+                        break;
+                }
+            }
+        }
+        return circProp;
+    }
+
+    public static Float[] getSwipeProp(Controller controller) {
+        Frame currentFrame = controller.frame();
+        GestureList allGestures = currentFrame.gestures();
+        Float[] swipeProp = {null, null};
+
+        if (allGestures.count() > 0) {
+            Gesture gesture;
+            Float direction, elapTime;
+            for (int i = 0; i < allGestures.count(); i++) {
+                gesture = allGestures.get(i);
+                switch (gesture.type()) {
+                    case TYPE_SWIPE:
+                        SwipeGesture swipe = new SwipeGesture(gesture);
+                        Vector swipeDirection = swipe.direction();
+                        direction = swipeDirection.magnitude();
+                        elapTime = (float) swipe.duration();
+                        swipeProp[0] = direction;
+                        swipeProp[1] = elapTime;
+                        break;
+                }
+            }
+        }
+        return swipeProp;
+    }
+
+    public static Float[] getScreenTapProp(Controller controller) {
+        Frame currentFrame = controller.frame();
+        GestureList allGestures = currentFrame.gestures();
+        Float[] screenProp = {null, null};
+
+        if (allGestures.count() > 0) {
+            Gesture gesture;
+            Float direction, elapTime;
+            for (int i = 0; i < allGestures.count(); i++) {
+                gesture = allGestures.get(i);
+                switch (gesture.type()) {
+                    case TYPE_SCREEN_TAP:
+                        ScreenTapGesture screenTap = new ScreenTapGesture(gesture);
+                        Vector tapDirection = screenTap.direction();
+                        direction = tapDirection.magnitude();
+                        elapTime = (float) screenTap.duration();
+                        screenProp[0] = direction;
+                        screenProp[1] = elapTime;
+                        break;
+                }
+            }
+        }
+        return screenProp;
+    }
+
+    public static Float[] getKeyTapProp(Controller controller) {
+        Frame currentFrame = controller.frame();
+        GestureList allGestures = currentFrame.gestures();
+        Float[] keyProp = {null, null};
+
+        if(allGestures.count() > 0) {
+            Gesture gesture;
+            Float direction, elapTime;
+            for (int i = 0; i < allGestures.count(); i++) {
+                gesture = allGestures.get(i);
+                switch (gesture.type()) {
+                    case TYPE_KEY_TAP:
+                        KeyTapGesture keyTap = new KeyTapGesture(gesture);
+                        Vector tapDirection = keyTap.direction();
+                        direction = tapDirection.magnitude();
+                        elapTime = (float) keyTap.duration();
+                        keyProp[0] = direction;
+                        keyProp[1] = elapTime;
+                        break;
+                }
+            }
+        }
+        return keyProp;
+    }
+
     // Return a float array with gesture properties
     // Types: circle    = 0
     //        swipe     = 1
@@ -385,6 +484,7 @@ public class Features {
         Frame currentFrame = controller.frame();
         GestureList allGestures = currentFrame.gestures();
         Float[] gestProp = {null, null, null};
+
         if (allGestures.count() > 0) {
             Gesture gesture;
             Float type, radius, dir, elapTime;
@@ -399,6 +499,7 @@ public class Features {
                         gestProp[0] = type;
                         gestProp[1] = radius;
                         gestProp[2] = elapTime;
+                        break;
                     case TYPE_SWIPE:
                         type = (float) 1;
                         SwipeGesture swipe = new SwipeGesture(gesture);
@@ -408,6 +509,7 @@ public class Features {
                         gestProp[0] = type;
                         gestProp[1] = dir;
                         gestProp[2] = elapTime;
+                        break;
                     case TYPE_SCREEN_TAP:
                         type = (float) 2;
                         ScreenTapGesture screenTap = new ScreenTapGesture(gesture);
@@ -417,6 +519,7 @@ public class Features {
                         gestProp[0] = type;
                         gestProp[1] = dir;
                         gestProp[2] = elapTime;
+                        break;
                     case TYPE_KEY_TAP:
                         type = (float) 3;
                         KeyTapGesture keyTap = new KeyTapGesture(gesture);
@@ -426,6 +529,7 @@ public class Features {
                         gestProp[0] = type;
                         gestProp[1] = dir;
                         gestProp[2] = elapTime;
+                        break;
                 }
             }
         }
