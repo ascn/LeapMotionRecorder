@@ -3,11 +3,6 @@ package leapmotionauthentication;
 import java.io.IOException;
 import com.leapmotion.leap.*;
 
-/**
- *
- * @author achan
- */
-
 public class LeapMotionAuthentication {
 
     /**
@@ -16,7 +11,7 @@ public class LeapMotionAuthentication {
     public static void main(String[] args) throws IOException {
         
         // Set timer
-        long programTime = 90000; // milliseconds
+        long programTime = 180000; // milliseconds
         long start = System.currentTimeMillis();
         long end = start + programTime;
 

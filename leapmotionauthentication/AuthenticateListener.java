@@ -8,11 +8,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author achan
- */
-
 public class AuthenticateListener extends Listener {
 
 	public static String fileName;
@@ -112,6 +107,8 @@ public class AuthenticateListener extends Listener {
         @Override
 	public void onFrame(Controller controller) {
 
+        Features.write(controller, fileName);
+/*
             String[] data = new String[138];
 
             // Get latest frame
@@ -243,7 +240,7 @@ public class AuthenticateListener extends Listener {
             } catch (IOException ex) {
                 Logger.getLogger(AuthenticateListener.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+*/
 	}
 
 }
